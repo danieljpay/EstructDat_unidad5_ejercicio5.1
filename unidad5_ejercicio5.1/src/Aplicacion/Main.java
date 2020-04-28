@@ -44,6 +44,7 @@ public class Main {
                 vertices[j] = entrada.next();
             }
             grafito.nuevoArco(vertices[0], vertices[1]);
+            grafito.nuevoArco(vertices[1], vertices[0]);
         }
         
         //impresion de matriz
