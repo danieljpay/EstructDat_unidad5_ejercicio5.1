@@ -18,11 +18,9 @@ public class GrafoMatriz {
     public GrafoMatriz(int mx){
         matAd = new int [mx][mx];
         verts = new Vertice[mx];
-        for (int i = 0; i < mx; i++){
-            for (int j = 0; i < mx; i++){   //¿es i lo que debe sumar o j?
+        for (int i = 0; i < mx; i++)
+            for (int j = 0; i < mx; i++)   //¿es i lo que debe sumar o j?
                 matAd[i][j] = 0;    
-            }
-        }
         numVerts = 0;       //¿va dentro del for o fuera?
     }
     
@@ -37,6 +35,10 @@ public class GrafoMatriz {
     public Vertice[] vertices(){
         return verts;    
     }
+    
+    public int[][] getMatriz(){
+        return matAd;
+    } 
     
     public void nuevoVertice(String nom){
         boolean esta = numVertice(nom) >= 0;
@@ -93,6 +95,16 @@ public class GrafoMatriz {
             } 
         }
         return (i < numVerts) ? i : -1 ;
+    }
+    
+    public void printMatAd( int mat[][], int n ){
+        for (int i = 0; i < n; i++) {
+            String strMat = " ";
+            for (int j = 0; j < n; j++) {
+                strMat += mat[i][j] + " ";
+            }
+            System.out.println(strMat);
+        }
     }
 }
 
