@@ -19,11 +19,11 @@ public class GrafoMatriz {
         matAd = new int [mx][mx];
         verts = new Vertice[mx];
         for (int i = 0; i < mx; i++){
-            for (int j = 0; i < mx; i++){
-                matAd[i][j] = 0;
+            for (int j = 0; i < mx; i++){   //¿es i lo que debe sumar o j?
+                matAd[i][j] = 0;    
             }
         }
-        numVerts = 0;       
+        numVerts = 0;       //¿va dentro del for o fuera?
     }
     
     public GrafoMatriz(){
@@ -56,7 +56,6 @@ public class GrafoMatriz {
             throw new Exception ("Vértice no existe");
         }
         matAd[va][vb] = 1;
-        
     }
 
     public void nuevoArco(int va, int vb) throws Exception{
@@ -76,7 +75,7 @@ public class GrafoMatriz {
         return matAd[va][vb] == 1;
     }
 
-    boolean adyacente(int va, int vb)throws Exception {
+    boolean adyacente(int va, int vb) throws Exception {
         if (va < 0 || vb < 0){
             throw new Exception ("Vértice no existe");
         }
