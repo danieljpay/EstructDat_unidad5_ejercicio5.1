@@ -51,5 +51,4 @@ public class Main {
         int[][] Matrix = grafito.getMatriz();
         grafito.printMatAd(Matrix, totalVertices);
     }
-    
 }
