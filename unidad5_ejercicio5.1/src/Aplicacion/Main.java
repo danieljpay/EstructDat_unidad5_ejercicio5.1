@@ -4,8 +4,6 @@
  * and open the template in the editor.
  */
 package Aplicacion;
-
-import Cola.Cola;
 import java.util.Scanner;
 import Grafo.*;
 
@@ -22,8 +20,6 @@ public class Main {
         int numArcos;
         int indexVertis;
         Scanner entrada = new Scanner(System.in);
-        Cola vertisNoProcesados = new Cola();
-        Cola vertisProcesados = new Cola();
         
         //inicio
         System.out.println("Formemos un grafo");
@@ -33,7 +29,7 @@ public class Main {
         
         //num vertices
         for (int i = 1; i <= totalVertices; i++) {
-            System.out.println("Ingresa el nombre del vértice " + i);
+            System.out.println("Ingresa el nombre del vértice " + i + ":");
             nom = entrada.next();
             grafito.nuevoVertice(nom);
         }
@@ -56,7 +52,8 @@ public class Main {
         grafito.printMatAd(Matrix, totalVertices);
         
         //recorrido de profundidad
-        grafito.recoAnchura(grafito);
+        System.out.println("Recorrido de anchura: ");
+        grafito.recoAnchura();
         
     }
 }

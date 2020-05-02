@@ -8,6 +8,7 @@ package Grafo;
 import Cola.Cola;
 import Cola.ColaLlenaException;
 import Cola.ColaVaciaException;
+import java.util.ArrayList;
 
 /**
  *
@@ -112,46 +113,43 @@ public class GrafoMatriz {
     }
     
     //recorrido de anchura
-    public void recoAnchura(GrafoMatriz unGrafo) throws ColaLlenaException, ColaVaciaException{
-        int indexVertAct = 0;
-        Vertice adyacente = null;
-        boolean vertiUsado;
-        Vertice[] procesados = new Vertice[unGrafo.numVerts];
-        int indexProcesados = 0;
-        Cola vertiActual = new Cola();
+    public void recoAnchura() throws ColaLlenaException, ColaVaciaException {
+        Cola porProcesar = new Cola();
+        ArrayList<Vertice> procesados = new ArrayList<Vertice>();
+        int index=0;
+        boolean procesado=false;
+        String vertisProces = "";
         
-        do {
-            vertiUsado=false;
-            vertiActual.insert(unGrafo.vertices()[indexVertAct]);   //se inserta vértice
-            System.out.println("Nodo actual: " + vertiActual.front().nombre);     //se imprime el nodo actual
-            /*se recorren los vértices dentro del grafo y si su matriz es igual a 1 significa que son adyacentes*/
-            for(int i=0; i<unGrafo.numeroDeVertices(); i++){    //se recorren los vértices del grafo
-                if(matAd[indexVertAct][i] == 1){    //si son adyacentes...
-                    if(procesados != null ){  //y sus adyacentes no están en procesados
-                        for (Vertice procesado : procesados) {
-                            if (unGrafo.vertices()[i] == procesado) {
-                                vertiUsado=true;
-                            }
-                        }
-                    }
-                    if(!vertiUsado){
-                    adyacente = unGrafo.vertices()[i];
-                    vertiActual.insert(adyacente);
-                    }
+        porProcesar.insert(this.verts[index]);
+        
+        while (procesados.size() != this.numVerts) {
+            System.out.println("Nodo actual: " + porProcesar.front().nombre);
+            if(!procesados.isEmpty()){
+                vertisProces="";
+                for (int p = 0; p < procesados.size(); p++) {
+                    vertisProces += procesados.get(p).nombre + " ";
                 }
             }
-            System.out.println("Vértices Procesados: ");
-            if(procesados.length > 0){
-                for (Vertice proce : procesados) {
-                    System.out.println(proce.toString());
+            System.out.println("Procesados: " + vertisProces);
+
+
+            for(int i=0; i<this.numVerts; i++){
+                procesado=false;
+                for(int j=0; j<procesados.size(); j++){
+                    if(verts[i] == procesados.get(j)){
+                        procesado=true;
+                    }
+                }
+                if(matAd[porProcesar.front().numVertice][i]==1 && procesado==false){
+                    porProcesar.insert(verts[i]);
                 }
             }
-            procesados[indexProcesados] = vertiActual.front();
-            indexProcesados++;
-            vertiActual.remove();
-            indexVertAct++;
-        } while (procesados.length != unGrafo.numVerts);
+            procesados.add(porProcesar.front());
+            porProcesar.remove();
+            index++;
+        }
         
+        System.out.println("\nRecorrido de anchura listo, todos los vértices han sido procesados :)");
     }
 }
 
