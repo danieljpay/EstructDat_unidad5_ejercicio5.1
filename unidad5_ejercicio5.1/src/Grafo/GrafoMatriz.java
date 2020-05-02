@@ -5,6 +5,10 @@
  */
 package Grafo;
 
+import Cola.Cola;
+import Cola.ColaLlenaException;
+import Cola.ColaVaciaException;
+
 /**
  *
  * @author plupy
@@ -105,6 +109,49 @@ public class GrafoMatriz {
             }
             System.out.println(strMat);
         }
+    }
+    
+    //recorrido de anchura
+    public void recoAnchura(GrafoMatriz unGrafo) throws ColaLlenaException, ColaVaciaException{
+        int indexVertAct = 0;
+        Vertice adyacente = null;
+        boolean vertiUsado;
+        Vertice[] procesados = new Vertice[unGrafo.numVerts];
+        int indexProcesados = 0;
+        Cola vertiActual = new Cola();
+        
+        do {
+            vertiUsado=false;
+            vertiActual.insert(unGrafo.vertices()[indexVertAct]);   //se inserta vértice
+            System.out.println("Nodo actual: " + vertiActual.front().nombre);     //se imprime el nodo actual
+            /*se recorren los vértices dentro del grafo y si su matriz es igual a 1 significa que son adyacentes*/
+            for(int i=0; i<unGrafo.numeroDeVertices(); i++){    //se recorren los vértices del grafo
+                if(matAd[indexVertAct][i] == 1){    //si son adyacentes...
+                    if(procesados != null ){  //y sus adyacentes no están en procesados
+                        for (Vertice procesado : procesados) {
+                            if (unGrafo.vertices()[i] == procesado) {
+                                vertiUsado=true;
+                            }
+                        }
+                    }
+                    if(!vertiUsado){
+                    adyacente = unGrafo.vertices()[i];
+                    vertiActual.insert(adyacente);
+                    }
+                }
+            }
+            System.out.println("Vértices Procesados: ");
+            if(procesados.length > 0){
+                for (Vertice proce : procesados) {
+                    System.out.println(proce.toString());
+                }
+            }
+            procesados[indexProcesados] = vertiActual.front();
+            indexProcesados++;
+            vertiActual.remove();
+            indexVertAct++;
+        } while (procesados.length != unGrafo.numVerts);
+        
     }
 }
 

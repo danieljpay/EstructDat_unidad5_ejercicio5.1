@@ -5,6 +5,7 @@
  */
 package Aplicacion;
 
+import Cola.Cola;
 import java.util.Scanner;
 import Grafo.*;
 
@@ -19,7 +20,10 @@ public class Main {
         int totalVertices;
         String nom;
         int numArcos;
+        int indexVertis;
         Scanner entrada = new Scanner(System.in);
+        Cola vertisNoProcesados = new Cola();
+        Cola vertisProcesados = new Cola();
         
         //inicio
         System.out.println("Formemos un grafo");
@@ -50,5 +54,9 @@ public class Main {
         //impresion de matriz
         int[][] Matrix = grafito.getMatriz();
         grafito.printMatAd(Matrix, totalVertices);
+        
+        //recorrido de profundidad
+        grafito.recoAnchura(grafito);
+        
     }
 }
