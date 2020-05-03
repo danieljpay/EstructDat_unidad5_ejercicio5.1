@@ -52,7 +52,7 @@ public class Main {
         grafito.printMatAd(Matrix, totalVertices);
         
         //recorrido de profundidad
-        System.out.println("Recorrido de anchura: ");
+        System.out.println("\nRecorrido de anchura: \n");
         grafito.recoAnchura();
         
     }
